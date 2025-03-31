@@ -30,7 +30,7 @@ setTimeout(callBackFunction reference,delay,arg1,arg2,arg3..);
 ### Code :
 
 
-- Different types of set function
+- Different types of setting function
 
 
 ```js
@@ -172,6 +172,10 @@ clearInterval(intervalID);  // Also we can use  clearTimeout(intervalID);
 These functions are essential for asynchronous timing in JavaScript, allowing you to control the execution of functions after delays or at regular intervals.
 
 
-## code-and-project-address
-- **`code-examples`**: 0103-setTimeout-setInterval.js
-- **`projects`**: 0103-setTimeout_setInterval.js
+## Projects
+
+- 1. Digital Clock (Real-Time Update) ⏰
+- 2. Countdown Timer with Pause & Reset ⏳
+- 3. Auto-Slideshow / Image Carousel 🎞
+- 4. Typing Effect Animation (Typewriter Effect) ⌨️
+- 5. Auto-Logout System (Inactivity Timer) 🔒
