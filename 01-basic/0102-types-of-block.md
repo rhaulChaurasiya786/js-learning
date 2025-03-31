@@ -14,7 +14,9 @@ In JavaScript, a block is a set of statements enclosed within curly braces {}. B
 - `var` variables are accessible anywhere and attach to `window` in the browser and attach to `global` in Node.js.
 - `let` and `const` stay in the global scope but don’t attach to `window`.
 - Global Variables Accessible Anywhere in
-### ✅ Code Example:
+
+
+### Code:
 
 ```js
 var globalVar = "I'm var";  // Attached to window
@@ -40,7 +42,7 @@ function sayHello() {
 sayHello(); 
 ```
 
-##### note:
+### Note:
 - `var` global variable can access directly or `window.varName` access from the other js files,means from anywher in same websites (due to attachement to window)
 - `let` & `const` access form only that files in which declared  (not attached to window)
 
@@ -51,12 +53,19 @@ sayHello();
 - Variables inside a function cannot be accessed outside it.
 - var,let and const declared in function block is not accessed from anywher 
 
+
+### Code:
+
+
 ```js
 // # Variables in Functions (Not Global)
 function testScope() {
     var localVar = "Inside function";
     let localLet = "Inside function";
     const localConst = "Inside function";
+    console.log(localVar);  // Inside function
+    console.log(localLet);  // Inside function
+    console.log(localConst);  // Inside function
   }
   
   console.log(localVar);  // Error: not defined
@@ -76,6 +85,9 @@ function testScope() {
 - It does not move downward (inside nested blocks).
 - With Conditional Blocks  --> `var` (hoisted), `let` & `const` block scoped inside `{}` brackets.
 - Works with Blocks, Conditionals, and Loops.
+
+
+### Code:
 
 
 ```js
