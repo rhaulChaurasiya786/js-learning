@@ -11,7 +11,17 @@
 -> Code outside functions, loops, blocks, or conditionals is in the global scope.
 -> `var` variables are accessible anywhere and attach to `window` in the browser and attach to `global` in Node.js.
 -> `let` and `const` stay in the global scope but don’t attach to `window`.
+### ✅ Code Example:
 
+```js
+var globalVar = "I'm var";  // Attached to window
+let globalLet = "I'm let";  // Not attached to window
+const globalConst = "I'm const";  // Not attached to window
+
+// console.log(window.globalVar);  // "I'm var"
+// console.log(window.globalLet);  // undefined
+// console.log(window.globalConst);  // undefined
+```
 
 
 ## 📦 Function Scope Block (var, let, const)
