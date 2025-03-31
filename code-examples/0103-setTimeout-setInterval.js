@@ -12,11 +12,12 @@ argn --> optinal
 function delayedExecution() { console.log("Executed after 2 seconds") }
 setTimeout(delayedExecution, 2000);
 
+// Anonymous Normal Function
+setTimeout(function () { console.log("Executed after 2 seconds") }, 2000);
+
 // Anonymous Arrow function
 setTimeout(() => { console.log("Executed after 2 seconds") }, 2000);
 
-// Anonymous Normal Function
-setTimeout(function () { console.log("Executed after 2 seconds") }, 2000);
 // ---->
 
 

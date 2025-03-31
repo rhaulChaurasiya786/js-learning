@@ -16,7 +16,7 @@ In JavaScript, a block is a set of statements enclosed within curly braces {}. B
 - Global Variables Accessible Anywhere in
 
 
-### Code:
+### Code :
 
 ```js
 var globalVar = "I'm var";  // Attached to window
@@ -42,7 +42,7 @@ function sayHello() {
 sayHello(); 
 ```
 
-### Note:
+### Note :
 - `var` global variable can access directly or `window.varName` access from the other js files,means from anywher in same websites (due to attachement to window)
 - `let` & `const` access form only that files in which declared  (not attached to window)
 
@@ -54,7 +54,7 @@ sayHello();
 - var,let and const declared in function block is not accessed from anywher 
 
 
-### Code:
+### Code :
 
 
 ```js
@@ -87,7 +87,7 @@ function testScope() {
 - Works with Blocks, Conditionals, and Loops.
 
 
-### Code:
+### Code :
 
 
 ```js
