@@ -1,9 +1,13 @@
 # 📜 Types of Blocks in JavaScript
 
-## 📦 Global Scope Block
-## 📦 Function Scope Block
-## 📦 Block Scope Block
-## 📦 Try-Catch Block
+In JavaScript, a block is a set of statements enclosed within curly braces {}. Blocks help structure code, define scope, and control execution flow. Here are the main types of blocks in JavaScript:
+
+- Global Scope Block
+- Function Scope Block
+- Block Scope Block
+- Try-Catch Block
+
+
 
 
 ## 📦 Global Scope Block (var, let, const)
@@ -24,10 +28,14 @@ const globalConst = "I'm const";  // Not attached to window
 ```
 
 
+
+
 ## 📦 Function Scope Block (var, let, const)
 
 - Functions create their own scope.
 - Variables inside a function cannot be accessed outside it.
+
+
 
 
 
@@ -44,9 +52,13 @@ const globalConst = "I'm const";  // Not attached to window
 
 
 
+
+
 ## 📦 Try-Catch Block
 
 - `var` is hoisted due to function-scoped behavior, while `let` & `const` are block scoped.
+
+
 
 
 
