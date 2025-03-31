@@ -6,9 +6,8 @@ In JavaScript, a block is a set of statements enclosed within curly braces {}. B
 - Function Scope Block
 - Block Scope Block
 - Try-Catch Block
-<br/>
-<br/>
-<br/>
+
+  
 ## 📦 Global Scope Block (var, let, const)
 
 - Code outside functions, loops, blocks, or conditionals is in the global scope.
@@ -25,16 +24,15 @@ const globalConst = "I'm const";  // Not attached to window
 // console.log(window.globalLet);  // undefined
 // console.log(window.globalConst);  // undefined
 ```
-<br/>
-<br/>
-<br/>
+
+
+
 ## 📦 Function Scope Block (var, let, const)
 
 - Functions create their own scope.
 - Variables inside a function cannot be accessed outside it.
-<br/>
-<br/>
-<br/>
+
+
 ## 📦 Block Scope Block (let, const)
 
 - Works only with `let` and `const` variables inside curly brackets `{}`.
@@ -45,15 +43,13 @@ const globalConst = "I'm const";  // Not attached to window
 - It does not move downward (inside nested blocks).
 - With Conditional Blocks  --> `var` (hoisted), `let` & `const` block scoped inside `{}` brackets.
 - Works with Blocks, Conditionals, and Loops.
-<br/>
-<br/>
-<br/>
+
+
 ## 📦 Try-Catch Block
 
 - `var` is hoisted due to function-scoped behavior, while `let` & `const` are block scoped.
-<br/>
-<br/>
-<br/>
+
+
 ## ✅ Conclusion
 
 - `var` behaves this way because JavaScript was originally designed without block scope.
