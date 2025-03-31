@@ -174,8 +174,8 @@ These functions are essential for asynchronous timing in JavaScript, allowing yo
 
 ## Projects
 
-- 1. Digital Clock (Real-Time Update) ⏰
-- 2. Countdown Timer with Pause & Reset ⏳
-- 3. Auto-Slideshow / Image Carousel 🎞
-- 4. Typing Effect Animation (Typewriter Effect) ⌨️
-- 5. Auto-Logout System (Inactivity Timer) 🔒
+- Digital Clock (Real-Time Update) ⏰
+- Countdown Timer with Pause & Reset ⏳
+- Auto-Slideshow / Image Carousel 🎞
+- Typing Effect Animation (Typewriter Effect) ⌨️
+- Auto-Logout System (Inactivity Timer) 🔒
