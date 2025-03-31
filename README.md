@@ -7,6 +7,15 @@ Welcome to my **JavaScript Learning Repository**! This repo follows the **Zettel
 ## 📂 Repository Structure
 📦 js-learning 
 ┣ 📂 01-basic # Basic JS concepts 
+
+-> 0101 - JS environments
+-> 0102 - Types of block
+-> 0103 - setTimeout and setInterval
+-> 0104 - Synchronous and Asynchronous
+-> 0105 - Types of Scope
+
+
+
 ┣ 📂 02-intermediate # Intermediate JS concepts 
 ┣ 📂 03-advanced # Advanced JS concepts 
 ┣ 📂 code-examples # JavaScript examples for reference 
