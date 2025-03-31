@@ -26,6 +26,13 @@ setTimeout(callBackFunction reference,delay,arg1,arg2,arg3..);
 // argn --> optinal
 ```
 
+
+### Code :
+
+
+- Different types of set function
+
+
 ```js
 // Normal function
 function delayedExecution() { console.log("Executed after 2 seconds") }
@@ -84,6 +91,9 @@ const timer7 = setTimeout(fun7, 1000, 1, 2, 3, 4, 5);
 The `setInterval` method executes a function repeatedly at a specified time interval. It is useful when you need a function to run at regular intervals, such as polling data or updating a timer.
 
 
+### Code :
+
+
 ```js
 // # Case-1 : ReferenceError: bro is not defined so added decalaration line
 let interval;
@@ -122,6 +132,9 @@ const interval5 = setInterval(fun5,2000,1,2,3,4,5);
 The `clearTimeout` method is used to cancel a timeout set by `setTimeout`. If the timeout has not yet occurred, calling `clearTimeout` will prevent the function from executing.
 
 
+### Code :
+
+
 ```js
 const timeoutID = setTimeout(() => {
     console.log("Timeout:This will not execute");
@@ -134,6 +147,9 @@ clearTimeout(timeoutID);  // Also we can use clearInterval(timeoutID)
 ## ✨ `clearInterval`
 
 The `clearInterval` method is used to cancel an interval set by `setInterval`. If the interval is still active, calling `clearInterval` will stop the repeated execution of the function.
+
+
+### Code :
 
 
 ```js
