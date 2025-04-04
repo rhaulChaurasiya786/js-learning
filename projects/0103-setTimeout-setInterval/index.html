@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Digital Clock</title>
+  <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->
+  <!-- <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet"> -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <style type="text/tailwindcss">
+    body {
+        font-family: "Roboto Mono", monospace;
+      }
+
+      /* Digital Timer */
+      .hoursMode.active {
+        background: white;
+        color: black;
+      }
+
+      /* Analog timer */
+      .clock::after {
+        content: "";
+        position: absolute;
+        z-index: 11;
+        width: 12px;
+        height: 12px;
+        background: black;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+      }
+
+      .number {
+        --rotation: 0;
+        width: 100%;
+        height: 100%;
+        color: black;
+        position: absolute;
+        text-align: center;
+        transform: rotate(var(--rotation));
+      }
+      .secondHand {
+        --rotation: 0deg;
+        transform: rotate(calc(var(--rotation) * 1));
+      }
+      .minuteHand {
+        --rotation: 0deg;
+        transform: rotate(calc(var(--rotation) * 1));
+      }
+
+      .hourHand {
+        --rotation: 0deg;
+        transform: rotate(calc(var(--rotation) * 1));
+      }
+      .number {
+        font-size: 1.5rem;
+      }
+      .number1 {
+        --rotation: 30deg;
+      }
+      .number2 {
+        --rotation: 60deg;
+      }
+      .number3 {
+        --rotation: 90deg;
+      }
+      .number4 {
+        --rotation: 120deg;
+      }
+      .number5 {
+        --rotation: 150deg;
+      }
+      .number6 {
+        --rotation: 180deg;
+      }
+
+      .number7 {
+        --rotation: 210deg;
+      }
+      .number8 {
+        --rotation: 240deg;
+      }
+      .number9 {
+        --rotation: 270deg;
+      }
+      .number10 {
+        --rotation: 300deg;
+      }
+      .number11 {
+        --rotation: 330deg;
+      }
+      .number12 {
+        --rotation: 360deg;
+      }
+    </style>
+</head>
+
+<body class="">
+  <!-- Digital clock -->
+  <div class="digitalClock w-full h-screen flex justify-center items-center bg-gradient-to-br from-gray-900 to-black">
+    <div class="w-fit h-full flex flex-col justify-center items-center gap-6">
+      <!-- Title -->
+      <div class="w-full text-center">
+        <p class="text-white text-4xl">
+          < Digital Timer />
+        </p>
+      </div>
+
+      <!-- Timer and Day -->
+      <div class="w-full flex items-center gap-8">
+        <!-- Timer -->
+        <div class="bg-gradient-to-r from-indigo-600 to-purple-600 w-fit flex gap-4 py-8 px-8 rounded-lg">
+          <!-- Timer status -->
+          <div class="flex gap-4" id="timer">
+            <div class="flex flex-col gap-3 items-center">
+              <label class="w-fit text-white bg-black rounded-full px-4">Hours</label>
+              <span class="bg-black text-8xl py-1 px-4 rounded-lg text-white" id="hoursDisplay"></span>
+            </div>
+
+            <div class="flex flex-col gap-3 items-center">
+              <label class="w-fit text-white bg-black rounded-full px-4">Minutes</label>
+              <span class="bg-black text-8xl py-1 px-4 rounded-lg text-white" id="minutesDisplay"></span>
+            </div>
+
+            <div class="flex flex-col gap-3 items-center">
+              <label class="w-fit text-white bg-black rounded-full px-4">Seconds</label>
+              <span class="bg-black text-8xl py-1 px-4 rounded-lg text-white" id="secondsDisplay"></span>
+            </div>
+          </div>
+
+          <!-- Meridian status -->
+          <div class="flex justify-center items-center">
+            <span class="text-4xl text-white" id="meridianIndicator"></span>
+          </div>
+        </div>
+
+        <!-- Day,month & year -->
+        <div class="w-fit text-center text-white text-xl flex flex-col gap-2">
+          <span class="text-white bg-black border border-white py-1 px-4 rounded-full" id="dayDisplay">
+          </span>
+          <span class="text-white bg-black border border-white py-1 px-4 rounded-full" id="monthDisplay">
+          </span>
+          <span class="text-white bg-black border border-white py-1 px-4 rounded-full" id="yearDisplay"></span>
+        </div>
+      </div>
+
+      <!-- Button 12H & 24H -->
+      <div class="w-full mt-6 text-center flex gap-4 justify-center items-center">
+        <button id="toggle12Hour" data-type="12"
+          class="hoursMode active cursor-pointer text-white border border-white rounded-full py-1 px-5 text-xl transition-all duration-200 ease-in-out hover:bg-white hover:text-black">
+          12H
+        </button>
+        <button id="toggle24Hour" data-type="24"
+          class="hoursMode cursor-pointer text-white border border-white rounded-full py-1 px-5 text-xl transition-all duration-200 ease-in-out hover:bg-white hover:text-black">
+          24H
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Analog clock -->
+  <div class="digitalClock w-full h-screen flex justify-center items-center">
+    <div class="w-fit h-full flex flex-col justify-center items-center gap-6">
+      <!-- Title -->
+      <div class="w-full text-center">
+        <p class="text-black text-4xl">
+          < Analog Timer />
+        </p>
+      </div>
+      <div class="clock relative w-[300px] h-[300px] bg-white rounded-full border-2 border-black text-white">
+        <div
+          class="secondHand absolute left-1/2 bottom-1/2 -translate-x-1/2 origin-bottom w-[3px] h-[40%] bg-red-500 rounded-t-xl z-[10]">
+        </div>
+        <div
+          class="minuteHand absolute left-1/2 bottom-1/2 -translate-x-1/2 origin-bottom w-[7px] h-[36%] bg-black z-[10] rounded-t-xl">
+        </div>
+        <div
+          class="hourHand absolute left-1/2 bottom-1/2 -translate-x-1/2 origin-bottom w-[7px] h-[26%] bg-black z-[10] rounded-t-xl">
+        </div>
+        <div class="number number1">1</div>
+        <div class="number number2">2</div>
+        <div class="number number3">3</div>
+        <div class="number number4">4</div>
+        <div class="number number5">5</div>
+        <div class="number number6">6</div>
+        <div class="number number7">7</div>
+        <div class="number number8">8</div>
+        <div class="number number9">9</div>
+        <div class="number number10">10</div>
+        <div class="number number11">11</div>
+        <div class="number number12">12</div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- Line Progress Bar -->
+  <div class="digitalClock w-full h-screen flex justify-center items-center bg-black">
+    <div class="w-fit h-fit flex flex-col justify-center items-center gap-6">
+      <div class="w-full text-center">
+        <p class="text-white text-4xl">
+          < Line Progress Bar />
+        </p>
+      </div>
+      <div class="w-full text-center">
+        <input 
+          type="number" 
+          class="w-full px-4 py-4 border border-white  text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          min="0" 
+          max="100" 
+          value="0"
+        />
+
+      </div>
+      <div class="w-full h-[30px] border border-white ">
+        <div class="progressFill py-3 w-0 h-full bg-green-500"></div>
+      </div>
+      <div class="w-full text-black">
+        <button
+          class="startProgress cursor-pointer bg-green-500 py-2 px-4 text-2xl rounded-md transition-all duration-200 ease-in-out  hover:bg-green-900 active:bg-green-500 ">Start</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Countdown Timer -->
+  <div class="digitalClock w-full h-screen flex justify-center items-center  bg-black">
+    <div class="w-fit h-full flex flex-col justify-center items-center gap-6">
+      <!-- Title -->
+      <div class="w-full text-center">
+        <p class="text-white text-4xl">
+          < Countdown Timer />
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="index.js"></script>
+</body>
+
+</html>
