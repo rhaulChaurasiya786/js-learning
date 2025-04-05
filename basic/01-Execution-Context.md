@@ -82,6 +82,27 @@ const amu="hey";
 console.log(amu);
 ```
 
+```js
+// # Execute becuase fully hoisted during memory creation phase
+sayHi();  
+
+function sayHi(){
+    console.log("Hello world");
+}
+```
+
+
+```js
+// # In Arrow function case
+sayHi();  // index.js:2 Uncaught TypeError: sayHi is not a function
+// # cuase sayHi is variable and this hoisted with undefined vlaue
+// # Note: When using arrow functions, you must declare them first, then use them.
+var sayHi =()=>{
+    console.log("Hello world");
+}
+```
+
+
 ---
 ![01 1](./image/01/img-1.jpg)
 
@@ -95,6 +116,48 @@ console.log(amu);
 - variable intialization with latest value 
 - creation of function execution context on function call
 
+
+
+
+## Hoisting
+
+- JS Hoisting refers to the process whereby the interpreter appears to move the declaration of functions, variables, classes, or imports to the top of their scope, prior to execution of the code.
+- In the creation phase, the interpreter scans the code.
+- variable and function are hoisted
+- var (with undefined) and function (with fully body code) hoisted during creation phase so that they accessible before initalization
+
+
+```js
+var temp="bro";
+console.log(temp);  // bro
+
+console.log(temp2); // undefined (due to hoisted with default value during creation phase)
+var temp2="bro";
+```
+
+- let/const variable hoisted but JS store in different zone (not allow to acces ) this zone is call Temporal Dead Zone (TDZ).
+- The TDZ refers to the period where a variable exists in a scope but cannot be accessed until it is initialized with latest value(during code executi)
+- The TDZ in JavaScript is a valuable feature that encourages better coding practices and prevents common errors related to variable declaration (bugs in var)
+
+
+```js
+let temp="bro";     
+console.log(temp);  // After accessible of initalization during code executio phase
+
+console.log(temp2); // ReferenceError: Cannot access 'temp2' before initialization
+let temp2="bro";
+```
+
+
+```js
+const temp="bro";     
+console.log(temp);  // After accessible of initalization during code executio phase
+
+console.log(temp2); // ReferenceError: Cannot access 'temp2' before initialization
+const temp2="bro";
+```
+
+
 ## JavaScript Hoisting Summary Table
 
 | Feature                      | `var`                   | `let` / `const`         | `function`                     |
@@ -106,3 +169,34 @@ console.log(amu);
 | **Redeclaration in same scope** | ✅ Yes              | (✅ let) (❌ const)                    | ✅ (function declaration)      |
 
 ---
+
+
+
+## CallStack
+- A mechanism which is used to keep track of the places of the multiple function calls is called callstack
+- This mechanism used by the interpreter (like the JavaScript interpreter in a web browser) 
+- Js is single-threaed language, so it only do one thing at a time ,The callstack helps manage the order of in which functions are called and executed.
+- Follow the FIFO (first in firs out rule)
+
+### Work
+- When funciton is called,then pushed onto the stack
+- When this function is called onther function than this new function is pushed onto the stack untill the last(most recent) funtionc finished the execution
+- If function execution complete then popped off the stack. and control goes where it form call.
+- maximum stack can cause stack overflow issues (RangeError)
+
+
+```js
+// # overflow issues by recursion
+let count=0;
+function sayHi()
+{
+    count++;
+    sayHi();
+}
+try{
+    sayHi();
+}
+catch{
+    console.log("Maximum stacks possible::>",count);
+}
+```
