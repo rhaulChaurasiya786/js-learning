@@ -85,7 +85,7 @@ console.log(amu);
 
 
 - Working of code
-![Homepage 2](./image/img-2.jpg)
+![alt text](./image/img-2.jpg)
 
 ### 1. Execution  Phase
 - In this phase, JavaScript runs the code line by line, assigns actual values to variables, and executes any function calls.
