@@ -8,7 +8,7 @@
 | 1    | **Loading**                   | Browser downloads the JavaScript file. |
 | 2    | **Parsing**                   | JS engine reads the code, checks syntax, and builds an Abstract Syntax Tree (AST). |
 | 3    | **Compilation**              | AST is converted into bytecode or machine code using Just-In-Time (JIT) compilation. |
-| 4    | **Global Execution Context Creation** | Sets up the global environment: hoists variables/functions and sets `this` to the global object. |
+| 4    | **Global Execution Context Creation by Execution Context Manager** | Sets up the global environment: hoists variables/functions and sets `this` to the global object. |
 | 5    | **Creation Phase**           | Memory is allocated: variables are initialized as `undefined`, functions are stored. |
 | 6    | **Execution Phase**          | Code is executed line-by-line, values are assigned, and functions are invoked. |
 | 7    | **Function Execution Context** | A new context is created for each function call and pushed onto the Call Stack. |
