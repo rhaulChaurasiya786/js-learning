@@ -200,3 +200,16 @@ catch{
     console.log("Maximum stacks possible::>",count);
 }
 ```
+
+## How Eexcution context work with callstack and Heap
+- callStack store primitive value and reference of heap memory
+- Heap store non-primitive vlaue (object,array,funciont body)
+- youTube link ::> https://www.youtube.com/@tapasadhikary
+---
+![01 3](./image/01/img-3.jpg)
+---
+
+
+## Heap
+## Scope 
+## Block
