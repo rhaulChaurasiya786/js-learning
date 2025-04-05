@@ -1,7 +1,7 @@
 # Execution Context
 
 
-## 🔁 JavaScript Execution Flow (Step-by-Step)
+## JavaScript Execution Flow (Step-by-Step)
 
 | Step | Name                          | Description |
 |------|-------------------------------|-------------|
@@ -17,7 +17,8 @@
 | 10   | **Execution Complete**       | Code finishes executing or continues waiting for asynchronous events. |
 
 
-## 📌 JavaScript Hoisting Summary Table
+
+## JavaScript Hoisting Summary Table
 
 | Feature                      | `var`                   | `let` / `const`         | `function`                     |
 |-----------------------------|--------------------------|--------------------------|--------------------------------|
@@ -26,7 +27,7 @@
 | **Temporal Dead Zone (TDZ)**| ❌ No                    | ✅ Yes                   | ❌ No                         |
 | **Can be accessed before declaration?** | ⚠️ Yes (returns `undefined`) | ❌ No (ReferenceError) | ✅ Yes (fully usable)         |
 | **Reassignment allowed**    | ✅ Yes                   | ✅ Yes                   | ✅ Yes                         |
-| **Redeclaration in same scope** | ✅ Yes              | ❌ No                    | ✅ (function declaration)      |
+| **Redeclaration in same scope** | ✅ Yes              | (✅ Yes for let) (❌ No for const)                    | ✅ (function declaration)      |
 
 ---
 
