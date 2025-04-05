@@ -16,3 +16,18 @@
 | 9    | **Event Loop & Callback Queue** | Handles asynchronous tasks like `setTimeout`, `fetch`, etc., after main thread is idle. |
 | 10   | **Execution Complete**       | Code finishes executing or continues waiting for asynchronous events. |
 
+
+## 📌 JavaScript Hoisting Summary Table
+
+| Feature                      | `var`                   | `let` / `const`         | `function`                     |
+|-----------------------------|--------------------------|--------------------------|--------------------------------|
+| **Hoisted**                 | ✅ Yes                   | ✅ Yes                   | ✅ Yes                         |
+| **Initialized during hoist**| ✅ As `undefined`        | ❌ No                    | ✅ Yes (entire function body) |
+| **Temporal Dead Zone (TDZ)**| ❌ No                    | ✅ Yes                   | ❌ No                         |
+| **Can be accessed before declaration?** | ⚠️ Yes (returns `undefined`) | ❌ No (ReferenceError) | ✅ Yes (fully usable)         |
+| **Reassignment allowed**    | ✅ Yes                   | ✅ Yes                   | ✅ Yes                         |
+| **Redeclaration in same scope** | ✅ Yes              | ❌ No                    | ✅ (function declaration)      |
+
+---
+
+## 🔍 Examples
