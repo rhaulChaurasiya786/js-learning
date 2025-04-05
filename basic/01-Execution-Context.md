@@ -81,11 +81,11 @@ console.log(amu);     // hey
 const amu="hey";
 console.log(amu);
 ```
-![Homepage 1](./image/img-1.jpg)
+![01 1](./image/01/img-1.jpg)
 
 
 - Working of code
-![alt text](./image/img-2.jpg)
+![01 2](./image/01/img-2.jpg)
 
 ### 1. Execution  Phase
 - In this phase, JavaScript runs the code line by line, assigns actual values to variables, and executes any function calls.
