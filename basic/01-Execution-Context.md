@@ -23,11 +23,10 @@
 | Feature                      | `var`                   | `let` / `const`         | `function`                     |
 |-----------------------------|--------------------------|--------------------------|--------------------------------|
 | **Hoisted**                 | ✅ Yes                   | ✅ Yes                   | ✅ Yes                         |
-| **Initialized during hoist**| ✅ As `undefined`        | ❌ No                    | ✅ Yes (entire function body) |
-| **Temporal Dead Zone (TDZ)**| ❌ No                    | ✅ Yes                   | ❌ No                         |
-| **Can be accessed before declaration?** | ⚠️ Yes (returns `undefined`) | ❌ No (ReferenceError) | ✅ Yes (fully usable)         |
+| **Initialized during hoist**| ✅ As `undefined`        | ❌ No (due to Temporal Dead Zone (TDZ))                 | ✅ Yes (entire function body) |
+| **Can be accessed before declaration?** | ⚠️ Yes (returns `undefined`) | ❌ No (ReferenceError not access before intialization in code execution phase) | ✅ Yes (fully usable)         |
 | **Reassignment allowed**    | ✅ Yes                   | ✅ Yes                   | ✅ Yes                         |
-| **Redeclaration in same scope** | ✅ Yes              | (✅ Yes for let) (❌ No for const)                    | ✅ (function declaration)      |
+| **Redeclaration in same scope** | ✅ Yes              | (✅ let) (❌ const)                    | ✅ (function declaration)      |
 
 ---
 
