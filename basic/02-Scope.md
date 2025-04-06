@@ -27,10 +27,11 @@
 
 
 ## Types of Scope
-- 1. Global Scope
-- 2. Function Scope
-- 3. Block Scope
-- 4. Lexical Scope (Closures)
+
+1. **Global Scope**
+2. **Function Scope**
+3. **Block Scope**
+4. **Lexical Scope (Closures)**
 
 ### Global Scope
 - Variable declared outside function & block is access from anywher in code
@@ -142,5 +143,33 @@ func(); // prints 5
 ```
 
 ---
+## Global and Local scope execution
+```js
+const userName="rahul";
+let userAge=25;
+var a=50;
+
+function add(){
+    const x=5;
+    const y=8;
+    console.log(x+y);
+    console.log(userName);
+}
+
+function subtract(){
+    const x=5;
+    const y=8;
+    console.log(x-y);
+    console.log(userName);
+}
+add();
+subtract();
+
+```
+
+
+![01 1](./image/01/img-4.jpg)
+---
+
 
 ## 🔍 Scope Chain:
