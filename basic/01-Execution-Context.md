@@ -176,7 +176,7 @@ const temp2="bro";
 - A mechanism which is used to keep track of the places of the multiple function calls is called callstack
 - This mechanism used by the interpreter (like the JavaScript interpreter in a web browser) 
 - Js is single-threaed language, so it only do one thing at a time ,The callstack helps manage the order of in which functions are called and executed.
-- Follow the FIFO (first in firs out rule)
+- Follow the LIFO rule(last in firs out) 
 
 ### Work
 - When funciton is called,then pushed onto the stack
@@ -210,6 +210,31 @@ catch{
 ---
 
 
-## Heap
+## Stack & Heap
+- stack store primitive vlaue and give copy of the value (so that original value is not chnaged)
+
+
+```js
+let a=10;
+let b="Hi";
+let c=a;     // Give copy of the value of the a 
+c=c+1;
+console.log(a);    // 10
+console.log(b);    // Hi
+console.log(c);    // 11
+console.log(a);    // 10 (chnaged in c not reflect in a cause only copy given not reference)
+```
+
+- stack memoery
+
+| Variable | Value  |
+|----------|--------|
+| a        | 10     |
+| b        | "Hi"   |
+| c        | 11     |
+
+
+- Heap store non-primitive value and give reference of the vlaue (so that chnages can reflect in other variable which have same reference)
+
 ## Scope 
 ## Block
