@@ -245,8 +245,8 @@ let d=c;          // reference value is copy so that c and d pointing to the sam
 d.push(3);
 console.log(a);    // 10
 console.log(b);    // Hi
-console.log(c);    // <0x01>
-console.log(d);    // <0x01>    
+console.log(c);    // <0x01> of [1,2,3]
+console.log(d);    // <0x01> of [1,2,3]
 ```
 
 
@@ -274,8 +274,26 @@ d=[1,2,3];       // new object is created in heasp and passed <0x02> (different 
 // # So vaiable c,d pointing to the different memory locatin of the Heap
 console.log(a);    // 10
 console.log(b);    // Hi
-console.log(c);    // <0x01>
-console.log(d);    // <0x02>    
+console.log(c);    // <0x01> of [1,2]
+console.log(d);    // <0x02> of [1,2,3]
 ```
-## Scope 
-## Block
+
+
+```js
+let a=10;
+let b=10;
+console.log(a==b);  // true ::> same value
+console.log(a===b); // true ::> same data types
+
+
+let c=[1,2];
+let d=c;
+console.log(c==d);  // true  ::> same value cause (same reference)
+console.log(c===d); // true  ::> same value & same types
+
+
+let e=[1,2];
+let f=[1,2,3];
+console.log(e==f);  // false ::> differ value  cause differ memory reference
+console.log(e===f); // false ::> differ value but same types
+```
