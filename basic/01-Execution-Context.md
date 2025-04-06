@@ -236,5 +236,46 @@ console.log(a);    // 10 (chnaged in c not reflect in a cause only copy given no
 
 - Heap store non-primitive value and give reference of the vlaue (so that chnages can reflect in other variable which have same reference)
 
+
+```js
+let a=10;
+let b="Hi";
+let c=[1,2];     // this array object created in heap and reference is stored in c (in callstack)
+let d=c;          // reference value is copy so that c and d pointing to the same memory location in heap
+d.push(3);
+console.log(a);    // 10
+console.log(b);    // Hi
+console.log(c);    // <0x01>
+console.log(d);    // <0x01>    
+```
+
+
+#### 📦 Stack Frame
+
+| Variable | Value   |
+|----------|---------|
+| a        | 10      |
+| b        | "Hi"    |
+| c        | <0x01>  |
+| d        | <0x01>  |
+
+### 📂 Heap References
+
+| Reference | Value    |
+|-----------|----------|
+| <0x01>    | [1, 2, 3] |
+
+```js
+let a=10;
+let b="Hi";
+let c=[1,2];     // this array object created in heap and reference is stored in c (in callstack)
+let d=c;         // reference value is copy so that c and d pointing to the same memory location in heap
+d=[1,2,3];       // new object is created in heasp and passed <0x02> (different memory address) to d vaiable in callstack
+// # So vaiable c,d pointing to the different memory locatin of the Heap
+console.log(a);    // 10
+console.log(b);    // Hi
+console.log(c);    // <0x01>
+console.log(d);    // <0x02>    
+```
 ## Scope 
 ## Block
