@@ -126,8 +126,28 @@ console.log(b);  // ReferenceError
 console.log(c);  // ReferenceError
 ```
 
-### Lexical Scope (Closures)
+### Lexical Scope (static scope)
+- Lexical Scope (also called Static Scope) means that a function’s scope is determined by where it is defined in the code, not where it is called.
+
+
+```js
+function outer() {
+  let name = "NexGenDev";
+
+  function inner() {
+    console.log(name);  // ✅ Accesses outer function's variable
+  }
+
+  inner();
+}
+outer();
+
+```
+
+
 - An inner function has access to the variables of its outer function, even after the outer function has finished executing.
+
+
 ```js
 function outer() {
   let x = 5;
@@ -139,13 +159,19 @@ function outer() {
 
 const func = outer();
 func(); // prints 5
-
 ```
+
+
+- Lexical scope means that a function has access to variables from the scope in which it was defined, not where it is executed. This concept is what powers closures in JavaScript.
+
+
+### Closure 
 
 ---
 ## Global and Local scope execution
+- youTube link ::> https://youtu.be/7QhMQRRBpZ0?si=kLwvp3ol4a02DKYF
 ```js
-const userName="rahul";
+const userName="Anurag";
 let userAge=25;
 var a=50;
 
@@ -172,4 +198,6 @@ subtract();
 ---
 
 
+## Lexical and Block Scope
+- youTube link ::> https://youtu.be/dvNqTN_nokg?si=pAg5b4deOq5KBAGi
 ## 🔍 Scope Chain:
