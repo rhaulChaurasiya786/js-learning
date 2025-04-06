@@ -222,6 +222,27 @@ counter();  // Count: 3
 - counter keeps accessing count even after outer() has finished.
 - That’s a closure.
 - ```A closure allows a function to retain access to its parent scope, even after the outer function has returned. It’s useful for creating private variables or maintaining state across multiple function calls```
+
+
+```js
+function doAddition(x) {
+  return function (y) {
+    return x + y;
+  };
+}
+
+var add5 = doAddition(4);
+console.log(add5(5));
+
+console.log(doAddition(5)(5));
+```
+
+- This is a classic example of a closure in JavaScript. A closure is when an inner function "remembers" the variables from its outer (enclosing) function's scope, even after the outer function has finished executing. In this case, the inner function remembers the value of x
+
+- The process of binding the required data with function is called clouser
+
+![05 5](./image/01/img-5.jpg)
+
 ---
 ## Global and Local scope execution
 - youTube link ::> https://youtu.be/7QhMQRRBpZ0?si=kLwvp3ol4a02DKYF
