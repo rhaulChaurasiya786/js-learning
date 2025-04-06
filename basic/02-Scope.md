@@ -166,7 +166,62 @@ func(); // prints 5
 
 
 ### Closure 
+- A closure is created when a function remembers and continues to access variables from its lexical (outer) scope, even after the outer function has finished executing.
+- A closure is a function bundled with its lexical environment — it can remember variables from where it was created, not just where it’s called.
 
+```js
+function init()
+{
+    var firstName="rahul";
+    function sayFirstName()
+    {
+        // # When above method is called execution context created & also clouser is set-up
+        console.log(firstName);
+    }
+    sayFirstName();
+}
+init();
+```
+- firstName is accessed due to closure setup (cause init execution context is removed from callstack)
+
+
+```js
+function init()
+{
+    var firstName="rahul";
+    function sayFirstName()
+    {
+        // # When above method is called execution context created & also clouser is set-up
+        console.log(firstName);
+    }
+    return sayFirstName;    // return reference of the sayFirstName method()
+}
+let value = init();  
+// # Here init() Excution context is removed from callstack but how below is assesed the sayFirstName and also get the value of the firstName
+value();   // due to closure setup
+```
+
+```js
+function outer() {
+  let count = 0;
+
+  return function inner() {
+    count++;
+    console.log("Count:", count);
+  };
+}
+
+const counter = outer();
+counter();  // Count: 1
+counter();  // Count: 2
+counter();  // Count: 3
+
+```
+- outer() runs once and returns inner().
+- count is part of outer()'s scope.
+- counter keeps accessing count even after outer() has finished.
+- That’s a closure.
+- ```A closure allows a function to retain access to its parent scope, even after the outer function has returned. It’s useful for creating private variables or maintaining state across multiple function calls```
 ---
 ## Global and Local scope execution
 - youTube link ::> https://youtu.be/7QhMQRRBpZ0?si=kLwvp3ol4a02DKYF
