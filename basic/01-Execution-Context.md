@@ -165,8 +165,8 @@ const temp2="bro";
 | **Hoisted**                 | ✅ Yes                   | ✅ Yes                   | ✅ Yes                         |
 | **Initialized during hoist**| ✅ As `undefined`        | ❌ No (due to Temporal Dead Zone (TDZ))                 | ✅ Yes (entire function body) |
 | **Can be accessed before declaration?** | ⚠️ Yes (returns `undefined`) | ❌ No (ReferenceError,cause not access before intialization in code execution phase) | ✅ Yes (fully usable)         |
-| **Reassignment allowed**    | ✅ Yes                   | ✅ Yes                   | ✅ Yes                         |
-| **Redeclaration in same scope** | ✅ Yes              | (✅ let) (❌ const)                    | ✅ (function declaration)      |
+| **Reassignment allowed**    | ✅ Yes                   | ✅ Yes (❌ No const)                  | ✅ Yes                         |
+| **Redeclaration in same scope** | ✅ Yes              | ❌ No                    | ✅ (function declaration)      |
 
 ---
 
