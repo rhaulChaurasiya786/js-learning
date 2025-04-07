@@ -166,83 +166,137 @@ func(); // prints 5
 
 
 ### Closure 
-- A closure is created when a function remembers and continues to access variables from its lexical (outer) scope, even after the outer function has finished executing.
 - A closure is a function bundled with its lexical environment — it can remember variables from where it was created, not just where it’s called.
-
-```js
-function init()
-{
-    var firstName="rahul";
-    function sayFirstName()
-    {
-        // # When above method is called execution context created & also clouser is set-up
-        console.log(firstName);
-    }
-    sayFirstName();
-}
-init();
-```
-- firstName is accessed due to closure setup (cause init execution context is removed from callstack)
-
-
-```js
-function init()
-{
-    var firstName="rahul";
-    function sayFirstName()
-    {
-        // # When above method is called execution context created & also clouser is set-up
-        console.log(firstName);
-    }
-    return sayFirstName;    // return reference of the sayFirstName method()
-}
-let value = init();  
-// # Here init() Excution context is removed from callstack but how below is assesed the sayFirstName and also get the value of the firstName
-value();   // due to closure setup
-```
-
-```js
-function outer() {
-  let count = 0;
-
-  return function inner() {
-    count++;
-    console.log("Count:", count);
-  };
-}
-
-const counter = outer();
-counter();  // Count: 1
-counter();  // Count: 2
-counter();  // Count: 3
-
-```
-- outer() runs once and returns inner().
-- count is part of outer()'s scope.
-- counter keeps accessing count even after outer() has finished.
-- That’s a closure.
-- ```A closure allows a function to retain access to its parent scope, even after the outer function has returned. It’s useful for creating private variables or maintaining state across multiple function calls```
-
-
-```js
-function doAddition(x) {
-  return function (y) {
-    return x + y;
-  };
-}
-
-var add5 = doAddition(4);
-console.log(add5(5));
-
-console.log(doAddition(5)(5));
-```
-
-- This is a classic example of a closure in JavaScript. A closure is when an inner function "remembers" the variables from its outer (enclosing) function's scope, even after the outer function has finished executing. In this case, the inner function remembers the value of x
-
-- The process of binding the required data with function is called clouser
+- The process of binding the required data (bind reference not copy) with function is called clouser
+- inner function closes over outer funciton variables ---> format a closure
+- YouTube link ::> https://www.youtube.com/watch?v=ThJOl1gqIjs
 
 ![05 5](./image/01/img-5.jpg)
 
+```js
+function outerFunction()
+{
+    let name="developer";
+    function innerFunction()
+    {
+        console.log(name);
+    }
+    innerFunction();
+}
+
+outerFunction();    // normal execution 
+innerFunction();    // ReferenceError: innerFunction is not defined
+```
+
+
+```js
+function outerFunction()
+{
+    let name="developer";
+    return function innerFunction()
+    {
+        console.log(name);
+    }
+    // # inside innerFunciton ,it's form a clouser with the vaiable  which is part of the oueterFunciton lexical scope
+    // # innerFunciton bind with the variable of the outerFunction and create clouser
+}
+
+let value=outerFunction();    // return reference of innerFunciont()
+// # After returning of outerFuntion their execution context will be completley removed from callStack 
+value(); // developer print
+// # innerFuncitn is accessible causee in heap is now referenced is by value (garbeage not consider as dead object)
+```
+
+
+```js
+// # One way
+function x()
+{
+    let a=5;
+    function y()
+    {
+        console.log(a);
+    }
+    return y;
+}
+
+let z=x();
+z();       // 5
+
+// # Second Way
+function x()
+{
+    let a=5;
+    return function y()
+    {
+        console.log(a);
+    }
+}
+
+let z=x();
+z();       // 5
+```
+
+
+- 
+## Function
+- “In JavaScript, function code is stored in the heap as an object. When the function is called, the engine creates an execution context in the stack, which references the function code in the heap. This keeps memory efficient and allows reuse of the function definition.”
+- This execution context includes the below things:
+  - `this`
+  - Parameters
+  - Local variables
+  - A reference to the outer lexical environment (for closures)
+  - A pointer to the function code (which is used to manages local state of the callstack)
+
+- Each function object created in different memory location in heap also nested function
+
+```js
+function fun1(){}
+function fun2(){}
+let a=fun1();  // return undefined cause in js each function by default return undefined
+let b=fun2();
+console.log(a);  // undefined
+console.log(b);  // undefined
+console.log(a==b); // true 
+console.log(a===b); // true
+```
+
+
+```js
+function fun1(){}
+function fun2(){}
+let a=fun1;
+let b=fun2;
+console.log(a);  // referernce to fun1
+console.log(b);  // referernce to fun2
+console.log(a==b); // false (differ reference) 
+console.log(a===b); // false (same function object but differ reference value)
+```
+
+
+- Also Nested funciton get different memory location in heap
+- In JavaScript, the outer function gets memory during the parsing phase. The inner function is not created or stored in memory until the outer function is actually called. When that happens, the inner function is created and forms a closure by capturing the outer function's variables via lexical scope.
+- Closure is formed during the execution phase, when an inner function is created inside an outer function and retains access to the outer function’s variables. This happens at runtime, not during memory allocation.
+```js
+function outer()
+{
+    let name="Hellow"
+    return function inner()   // It created in heap if called outer() otherwise only outer() get moemory in Heap during memory creation phase
+    {
+        console.log(name);
+    }
+}
+let a=outer;
+let b=outer();   // inner() function object is created with closure in heap and return their reference
+// # closure is linking betweeen child funciton object in heap
+console.log(a);  // referernce of outer
+console.log(b);  // referernce to inner
+console.log(a==b); // false (differ reference) 
+console.log(a===b); // false (same function object but differ reference value)
+```
+
+- Closure is a link between the inner (child) function and the outer function’s memory stored in heap.
+- Closure is a connection made between inner function and outer function's data, so the inner function can use that data later.
 ---
 ## Global and Local scope execution
 - youTube link ::> https://youtu.be/7QhMQRRBpZ0?si=kLwvp3ol4a02DKYF
