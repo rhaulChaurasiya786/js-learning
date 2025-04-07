@@ -297,6 +297,16 @@ console.log(a===b); // false (same function object but differ reference value)
 
 - Closure is a link between the inner (child) function and the outer function’s memory stored in heap.
 - Closure is a connection made between inner function and outer function's data, so the inner function can use that data later.
+- An inner function doesn't store the outer variables directly. Instead, it keeps a reference to the entire outer scope. This is like knowing the address of a house — if you want to use something (like a TV), you go through the house. That’s what closure does: it links the inner function back to its lexical environment.
+- Functions object is creates in heap but this like a blueprint(shared)(prompt the reusabilty concept) in heap and creation of their variabel data on stack so that each function get their own scop(house) and things(house things like tv etc..) and user according to their requirement.
+- If vairble is created in funciton object(heap) than, each funtion get commoon house staff (not useable according to thier requiremnt) and fail the concept of reuseabilty.
+
+
+### ✅ A Closure is Formed Only When:
+
+1. A function is defined inside another function
+2. The inner function uses variables from the outer function
+3. The inner function is returned or passed somewhere, so it outlives the outer function
 ---
 ## Global and Local scope execution
 - youTube link ::> https://youtu.be/7QhMQRRBpZ0?si=kLwvp3ol4a02DKYF
