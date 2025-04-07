@@ -165,7 +165,7 @@ func(); // prints 5
 - Lexical scope means that a function has access to variables from the scope in which it was defined, not where it is executed. This concept is what powers closures in JavaScript.
 
 
-### Closure 
+# Closure 
 - A closure is a function bundled with its lexical environment — it can remember variables from where it was created, not just where it’s called.
 - The process of binding the required data (bind reference not copy) with function is called clouser
 - inner function closes over outer funciton variables ---> format a closure
@@ -239,7 +239,7 @@ z();       // 5
 
 
 - 
-## Function
+# Function
 - “In JavaScript, function code is stored in the heap as an object. When the function is called, the engine creates an execution context in the stack, which references the function code in the heap. This keeps memory efficient and allows reuse of the function definition.”
 - This execution context includes the below things:
   - `this`
