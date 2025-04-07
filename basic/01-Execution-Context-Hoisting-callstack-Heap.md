@@ -41,6 +41,15 @@
 - Created **every time a function is called**.
 - Represents the **local scope** of that function.
 - Multiple function contexts can be created during runtime.
+- Similar to GEC and creates the following things
+  - ### Creation phase
+  - creatio of argument object 
+  - creation of this object(this is keyword) (with reference of global object)
+  - memory for variable and functon in local scope
+  - Assign the variable declaration with default value and function body
+  - setup the argument object with local scope
+  - ### Execution phase
+  - assignment of lates value to variabel and function call happen (creation of new context)
 
 ### 2. Eval Execution Context (rarely used)
 
@@ -52,11 +61,10 @@
 
 ### 1. Creation Phase
 - In this phase, JavaScript engine sets up the environment for the code by: creating the execution context, allocating memory for variables and functions, setting the this value, creating the lexical environment, and setting up the scope chain.
-- window object creation
+- Create a global object (window in browser)(global in nodejs).
 - this keyword creation with reference of the window object (this===window) -> true (have same reference object)
-- memory allocation of the variabel with default value and function body (fully hoisted with code)(full access before declaration)
-- creating the scope chain
-- setup the lexical environment
+- memory allocation for variable and funciton
+- Assign the variable declaration with default value and function body (fully hoisted with code)(full access before declaration)
 
 #### note:
 ```js
@@ -172,7 +180,7 @@ const temp2="bro";
 
 
 
-## CallStack
+## CallStack (Executio stack)
 - A mechanism which is used to keep track of the places of the multiple function calls is called callstack
 - This mechanism used by the interpreter (like the JavaScript interpreter in a web browser) 
 - Js is single-threaed language, so it only do one thing at a time ,The callstack helps manage the order of in which functions are called and executed.

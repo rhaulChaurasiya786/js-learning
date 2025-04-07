@@ -1,4 +1,5 @@
 # Scope
+- The scope is generally referred to as the logical boundary within which your variables are accessible.
 - Scope means the area in your code where a variable or value can be seen or used. If something is outside the scope, you can’t use it from where you are.
 - The scope is the current context of execution in which values and expressions are "visible" or can be referenced. If a variable or expression is not in the current scope, it will not be available for use. Scopes can also be layered in a hierarchy, so that child scopes have access to parent scopes, but not vice versa.
 - Scope in JavaScript refers to the accessibility or visibility of variables and expressions. That means the space where an item, such as a variable or a function, is visible and accessible in your code.
@@ -236,7 +237,72 @@ function x()
 let z=x();
 z();       // 5
 ```
+### Application of the Closure
+- 
+1. Data Privacy / Encapsulation : Closures allow variables to be private, preventing direct access from the outside.
+- count is private. Only the returned function can access it — this is closure in action.
+```js
+function createCounter() {
+  let count = 0;
 
+  return function () {
+    count++;
+    return count;
+  };
+}
+
+const counter = createCounter();
+console.log(counter()); // 1
+console.log(counter()); // 2
+```
+
+
+
+2. Function Factories : You can use closures to create customized functions.
+- greetHello remembers msg = "Hello" via closure.
+```js
+function greet(msg) {
+  return function (name) {
+    console.log(`${msg}, ${name}`);
+  };
+}
+
+const greetHello = greet("Hello");
+greetHello("Alice"); // Hello, Alice
+
+```
+
+
+
+3. Event Handlers / Callbacks : Closures help preserve data even after the outer function finishes execution.
+- 👉 The click handler remembers count due to closure, even after setupButton() has finished.
+```js
+function setupButton() {
+  let count = 0;
+
+  document.getElementById("btn").addEventListener("click", function () {
+    count++;
+    console.log("Clicked:", count);
+  });
+}
+
+setupButton();
+```
+
+
+
+4. setTimeout / setInterval : Closures are useful when delaying logic.
+- 👉 The inner function remembers msg after delayMessage() has finished — thanks to closure.
+```js
+function delayMessage(msg) {
+  setTimeout(function () {
+    console.log(msg);
+  }, 1000);
+}
+
+delayMessage("Hello after 1 sec");
+
+```
 
 - 
 # Function
@@ -306,7 +372,97 @@ console.log(a===b); // false (same function object but differ reference value)
 
 1. A function is defined inside another function
 2. The inner function uses variables from the outer function
-3. The inner function is returned or passed somewhere, so it outlives the outer function
+3. The inner function is returned or passed somewhere, so it outlives the outer 
+
+
+- closure is formed during execiton phase of outer()  (but inner() function object created in heap at memory creation phase)
+- inner() is created as a function object in the heap.
+- It remembers the lexical environment in which it was created (i.e., inside outer()).
+- But: Since inner() does not access any variable from outer(),
+👉 no variables are captured — this is called an empty closure.
+- A closure is still formed, but it is empty — because the inner function does not access any variables from the outer scope.
+- So, closure is formed at this point — during the execution phase, when inner() is defined, but it's empty.
+-  The closure object contains references (not actual values) to the variables of the outer scope that are used by the inner function.
+- The closure is not just the inner function — it’s the inner function along with the closure object that holds the outer variables it needs.
+- A closure = inner function + the references to the outer scope variables it uses.
+- Closure is created during the execution of the outer, and becomes active when the inner is used (when inner() is invoked).
+```js
+// # Not form the clouser
+// # inner not user outer scope
+// # inner() is not passed anywehere and cleare the context (so become dead object)(not have any reference so free up the memory by garbage collector)
+// # Closuer is not formed during creation phase
+# 
+function outer()
+{
+    let a=10;
+    function inner()
+    {
+        console.log("Hellow");
+    }
+    inner();
+}
+
+outer();
+```
+
+
+```js
+// # closure is created during exection phase of the outer and inner() is invoked
+// # Formatio of clouse is happen during the creation phase of the outer and is become active during executuon pahse(inner() invoked)
+function outer()
+{
+    let a=10;
+    function inner()
+    {
+        console.log(a);
+    }
+    inner();
+}
+
+outer();
+```
+
+
+```js
+debugger
+function x()
+{
+    let a=10;
+    function y()
+    {
+        let b=20;
+        function z()
+        {
+            console.log(a,b);
+        }
+        z();
+        console.log(a);
+    }
+
+    y();
+}
+x();
+```
+- When a variable is used in a closure, JavaScript moves it from the stack to the heap, specifically into a closure environment object, so it remains accessible by reference.
+
+
+
+```js
+function outer() {
+  let a = 100; // 👈 Normally stack
+  function inner() {
+    console.log(a); // 👈 Captured in closure
+  }
+  return inner;
+}
+
+const fn = outer(); // a stays alive in heap!
+fn(); // Still prints 100 even though outer is gone
+
+```
+
+
+
 ---
 ## Global and Local scope execution
 - youTube link ::> https://youtu.be/7QhMQRRBpZ0?si=kLwvp3ol4a02DKYF
@@ -341,3 +497,111 @@ subtract();
 ## Lexical and Block Scope
 - youTube link ::> https://youtu.be/dvNqTN_nokg?si=pAg5b4deOq5KBAGi
 ## 🔍 Scope Chain:
+- Lexical means order,hirerachy and sequence (means where the inner funciton is physically parsent inside the outer function )(location info)
+- When Execution context is creare than also lexical environment is also created
+-  Lexical Environment === Local memory (containe current scope + reference of outer scope )
+- Lexical Scope defines how those environments are linked together
+- Lexical environment is the local memory along with lexical environment of the it's parent(referenc of parent local memory).
+- A lexical environment in JavaScript is a data structure that stores variables and functions defined in the current scope, along with references to all outer scopes. It is also known as the lexical scope.
+- Lexical enviroment = current scope + reference of outer scope.
+- Lexical scope means that the scope of a variable is determined by its position in the source code.
+- The chain of lexical environments is called the scope chain.
+- Eache execution context create lexial environment and this contain current lexical environment + reference of outer parent lexical environment
+
+### Working of scop chain
+-When a variable is accessed, the JavaScript engine follows a specific lookup process based on **lexical scoping** and the **scope chain**.
+
+### 🪜 Step-by-Step Lookup
+
+1. **Check the variable in the current lexical environment** (local/function/block scope).
+2. **If not found**, follow the **reference to the outer lexical environment** (parent scope).
+3. **Check in the parent's scope.**
+4. **Continue this process** recursively until reaching the **global scope**.
+5. **If not found in the global scope**, the outer reference becomes `null`, and JavaScript throws a:
+
+```js
+ReferenceError: variableName is not defined
+```
+
+- Consider a real world example House(global scope) and room inside(funciton),item in rooms (variable), doors(scope chaining,reference of outer lexical scope)
+
+```js
+// # Big House (gloabl lexical environment of gloabl scope)
+// # This door create the scope chaining between diffenrt house (differ execution context);
+let tv="sony";
+let fridge="LG";
+function bedroom()
+{   // Lexical end bedroom
+    let bedroom="King Size";
+    function studyRoom()
+    { // Lexical env study romm + reference of outer pareent lexical env by opening doors
+      let books="maths";
+      console.log(tv);  // need to fresh the mind by watching tv 
+      console.log(fridge); // need to dring some water  
+    }
+    studyRoom();
+}
+
+bedroom();
+
+```
+
+
+
+# Notes
+- Block scope (or nested block scope) give memory to function if it is used(invoked) or not used(not call) in that scope
+- But inner function not get memory unitll tehy not used(not called) in that scope.
+- When block is created than execution context is not create (used outer scope memory) but lexical enviroment is created.
+- When function is created than execution context(use own local scope) & lexical environment is created.
+- Block lexical environments are also freed after execution finishes — just like function scopes.
+
+
+
+```js
+debugger
+{
+    let a=100;
+    function bro(){};// get memory duration creation phase
+    console.log("block-1");
+    {
+        let b=100;
+        function brosfd(){};        // get memory duration creation phase
+        console.log("block-2");
+    }
+}
+function amu1()
+{
+    let a=10;
+
+    function amu2()        // not get memory duration creation phase cause not called 
+    {
+        console.log(a);
+    }
+    function amu3()        // not get memory duration creation phase cause not called
+    {
+
+    }
+    {
+        let a=100;
+        function bro(){}
+        console.log("block-1");        // get memory duration creation phase
+        {
+            let b=100;
+            function brosfd(){}
+            console.log("block-2");        // get memory duration creation phase
+        }
+    }
+}
+amu1();
+```
+
+
+| Concept                  | Function Scope       | Block Scope (`{}`)     |
+|--------------------------|----------------------|--------------------------|
+| Creates Execution Context? | ✅ Yes              | ❌ No                   |
+| Creates Lexical Environment? | ✅ Yes           | ✅ Yes                 |
+| Added to Scope Chain?    | ✅ Yes              | ✅ Yes                 |
+| Hoisting behavior        | `var`, `let`, `const` | Only `let`, `const`   |
+| Memory Lifetime          | Until function exits / closure | Until block exits |
+
+
