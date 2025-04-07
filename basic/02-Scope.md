@@ -166,6 +166,110 @@ func(); // prints 5
 - Lexical scope means that a function has access to variables from the scope in which it was defined, not where it is executed. This concept is what powers closures in JavaScript.
 
 
+
+
+# 🔍 Scope Chain
+- YouTube URL : https://www.youtube.com/watch?v=uH-tVP8MUs8&t=47s
+- Lexical means order,hirerachy and sequence (means where the inner funciton is physically parsent inside the outer function )(location info)
+- When Execution context is creare than also lexical environment is also created
+-  Lexical Environment === Local memory (containe current scope + reference of outer scope )
+- Lexical Scope defines how those environments are linked together
+- Lexical environment is the local memory along with lexical environment of the it's parent(referenc of parent local memory).
+- A lexical environment in JavaScript is a data structure that stores variables and functions defined in the current scope, along with references to all outer scopes. It is also known as the lexical scope.
+- Lexical enviroment = current scope + reference of outer scope.
+- Lexical scope means that the scope of a variable is determined by its position in the source code.
+- The chain of lexical environments is called the scope chain.
+- Eache execution context create lexial environment and this contain current lexical environment + reference to lexical environment of it's parent
+
+### Working of scop chain
+- When a variable is accessed, the JavaScript engine follows a specific lookup process based on **lexical scoping** and the **scope chain**.
+
+### 🪜 Step-by-Step Lookup
+
+1. **Check the variable in the current lexical environment** (local/function/block scope).
+2. **If not found**, follow the **reference to the outer lexical environment** (parent scope).
+3. **Check in the parent's scope.**
+4. **Continue this process** recursively until reaching the **global scope**.
+5. **If not found in the global scope**, the outer reference becomes `null`, and JavaScript throws a:
+
+```js
+// # ReferenceError: variableName is not defined
+function outer() {
+  let a = 10;
+
+  function inner() {
+    console.log(a); // ✅ Found in outer
+    console.log(b); // ❌ ReferenceError --> stop the execution --> cleanup stacks --> Garbase collector clean the heap if function does not have any reference & closure
+  }
+
+  inner();
+}
+
+outer();
+
+```
+
+- Consider a real world example House(global scope) and room inside(funciton),item in rooms (variable), doors(scope chaining,reference of outer lexical scope)
+
+```js
+// # Big House (gloabl lexical environment of gloabl scope)
+// # This door create the scope chaining between diffenrt house (differ execution context);
+let tv="sony";
+let fridge="LG";
+function bedroom()
+{   // Lexical end bedroom
+    let bedroom="King Size";
+    function studyRoom()
+    { // Lexical env study romm + reference of outer pareent lexical env by opening doors
+      let books="maths";
+      console.log(tv);  // need to fresh the mind by watching tv 
+      console.log(fridge); // need to dring some water  
+    }
+    studyRoom();
+}
+
+bedroom();
+
+```
+
+
+- scope chain works independently per child.
+```js
+let parentItem = "House Key"; // Global scope (Parent's item)
+
+function room1() {
+  let room1Item = "Football";
+  console.log(parentItem); // ✅ Accessible
+  console.log(room1Item);   // ✅ Own item
+  // console.log(son2Item); // ❌ Not accessible
+}
+
+function room2() {
+  let room2Item = "Laptop";
+  console.log(parentItem); // ✅ Accessible
+  console.log(room2Item);   // ✅ Own item
+}
+
+function room3() {
+  let room3Item = "Book";
+  console.log(parentItem); // ✅ Accessible
+  console.log(room3Item);   // ✅ Own item
+}
+
+function room4() {
+  let room4Item = "Guitar";
+  console.log(parentItem); // ✅ Accessible
+  console.log(room4Item);   // ✅ Own item
+}
+
+// Each son goes to his room
+room1();
+room2();
+room3();
+room4();
+```
+
+
 # Closure 
 - A closure is a function bundled with its lexical environment — it can remember variables from where it was created, not just where it’s called.
 - The process of binding the required data (bind reference not copy) with function is called clouser
@@ -303,6 +407,16 @@ function delayMessage(msg) {
 delayMessage("Hello after 1 sec");
 
 ```
+
+
+
+| Concept       | Real World Analogy                 | JavaScript Equivalent                          |
+|---------------|------------------------------------|-------------------------------------------------|
+| Scope Chain   | Child goes to Dad → then Grandpa   | Inner function looks up through outer scopes   |
+| Closure       | Child remembers Dad’s toy          | Function remembers variables from parent scope |
+
+
+
 
 - 
 # Function
@@ -496,55 +610,7 @@ subtract();
 
 ## Lexical and Block Scope
 - youTube link ::> https://youtu.be/dvNqTN_nokg?si=pAg5b4deOq5KBAGi
-## 🔍 Scope Chain:
-- Lexical means order,hirerachy and sequence (means where the inner funciton is physically parsent inside the outer function )(location info)
-- When Execution context is creare than also lexical environment is also created
--  Lexical Environment === Local memory (containe current scope + reference of outer scope )
-- Lexical Scope defines how those environments are linked together
-- Lexical environment is the local memory along with lexical environment of the it's parent(referenc of parent local memory).
-- A lexical environment in JavaScript is a data structure that stores variables and functions defined in the current scope, along with references to all outer scopes. It is also known as the lexical scope.
-- Lexical enviroment = current scope + reference of outer scope.
-- Lexical scope means that the scope of a variable is determined by its position in the source code.
-- The chain of lexical environments is called the scope chain.
-- Eache execution context create lexial environment and this contain current lexical environment + reference of outer parent lexical environment
 
-### Working of scop chain
--When a variable is accessed, the JavaScript engine follows a specific lookup process based on **lexical scoping** and the **scope chain**.
-
-### 🪜 Step-by-Step Lookup
-
-1. **Check the variable in the current lexical environment** (local/function/block scope).
-2. **If not found**, follow the **reference to the outer lexical environment** (parent scope).
-3. **Check in the parent's scope.**
-4. **Continue this process** recursively until reaching the **global scope**.
-5. **If not found in the global scope**, the outer reference becomes `null`, and JavaScript throws a:
-
-```js
-ReferenceError: variableName is not defined
-```
-
-- Consider a real world example House(global scope) and room inside(funciton),item in rooms (variable), doors(scope chaining,reference of outer lexical scope)
-
-```js
-// # Big House (gloabl lexical environment of gloabl scope)
-// # This door create the scope chaining between diffenrt house (differ execution context);
-let tv="sony";
-let fridge="LG";
-function bedroom()
-{   // Lexical end bedroom
-    let bedroom="King Size";
-    function studyRoom()
-    { // Lexical env study romm + reference of outer pareent lexical env by opening doors
-      let books="maths";
-      console.log(tv);  // need to fresh the mind by watching tv 
-      console.log(fridge); // need to dring some water  
-    }
-    studyRoom();
-}
-
-bedroom();
-
-```
 
 
 
