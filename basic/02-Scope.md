@@ -418,7 +418,7 @@ delayMessage("Hello after 1 sec");
 
 
 
-- 
+
 # Function
 - “In JavaScript, function code is stored in the heap as an object. When the function is called, the engine creates an execution context in the stack, which references the function code in the heap. This keeps memory efficient and allows reuse of the function definition.”
 - This execution context includes the below things:
@@ -671,3 +671,5 @@ amu1();
 | Memory Lifetime          | Until function exits / closure | Until block exits |
 
 
+## Learn below link today
+- https://www.youtube.com/watch?v=d4_hcQkGkfI

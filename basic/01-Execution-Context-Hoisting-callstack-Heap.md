@@ -168,13 +168,13 @@ const temp2="bro";
 
 ## JavaScript Hoisting Summary Table
 
-| Feature                      | `var`                   | `let` / `const`         | `function`                     |
-|-----------------------------|--------------------------|--------------------------|--------------------------------|
-| **Hoisted**                 | ✅ Yes                   | ✅ Yes                   | ✅ Yes                         |
-| **Initialized during hoist**| ✅ As `undefined`        | ❌ No (due to Temporal Dead Zone (TDZ))                 | ✅ Yes (entire function body) |
-| **Can be accessed before declaration?** | ⚠️ Yes (returns `undefined`) | ❌ No (ReferenceError,cause not access before intialization in code execution phase) | ✅ Yes (fully usable)         |
-| **Reassignment allowed**    | ✅ Yes                   | ✅ Yes (❌ No const)                  | ✅ Yes                         |
-| **Redeclaration in same scope** | ✅ Yes              | ❌ No                    | ✅ (function declaration)      |
+| Feature                               | `var`                            | `let` / `const`                                 | `function`                             |
+|----------------------------------------|----------------------------------|--------------------------------------------------|----------------------------------------|
+| **Hoisted**                            | ✅ Yes                           | ✅ Yes                                            | ✅ Yes                                 |
+| **Initialized during hoist**           | ✅ As `undefined`                | ❌ No (TDZ - Temporal Dead Zone)                 | ✅ Yes (entire function body available) |
+| **Can be accessed before declaration?**| ⚠️ Yes (`undefined` returned)    | ❌ No (ReferenceError due to TDZ)                | ✅ Yes (usable before declaration)     |
+| **Reassignment allowed**               | ✅ Yes                           | ✅ Yes (`let`), ❌ No (`const`)                   | ✅ Yes (function can be reassigned)    |
+| **Redeclaration in same scope**        | ✅ Yes                           | ❌ No                                             | ✅ Yes (only function declarations)    |
 
 ---
 
