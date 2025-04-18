@@ -135,7 +135,7 @@ var sayHi =()=>{
 
 ## Hoisting
 
-- JS Hoisting refers to the process whereby the interpreter appears to move the declaration of functions, variables, classes, or imports to the top of their scope, prior to execution of the code.
+- JS Hoisting refers to the process whereby the interpreter appears to move the declaration of variables, functions, classes, or imports to the top of their scope, prior to execution of the code.
 - In the creation phase, the interpreter scans the code.
 - variable and function are hoisted
 - var (with undefined) and function (with fully body code) hoisted during creation phase so that they accessible before initalization
@@ -150,8 +150,8 @@ var temp2="bro";
 ```
 
 - let/const variable hoisted but JS store in different zone (not allow to acces ) this zone is call Temporal Dead Zone (TDZ).
-- The TDZ refers to the period where a variable exists in a scope but cannot be accessed until it is initialized with latest value(during code executi)
-- The TDZ in JavaScript is a valuable feature that encourages better coding practices and prevents common errors related to variable declaration (bugs in var)
+- The TDZ refers to the period where a variable exists in a scope but cannot be accessed until it is initialized with latest value(during code execution)
+- The TDZ in JavaScript is a valuable feature that encourages better coding practices and prevents common errors related to variable declaration of var (bugs in var)
 
 
 ```js
@@ -174,19 +174,13 @@ const temp2="bro";
 
 ## JavaScript Hoisting Summary Table
 
-| Feature                             | `var`                        | `let`                             | `const`                           |
-|-------------------------------------|------------------------------|-----------------------------------|-----------------------------------|
-| **Scope**                           | Function / Global            | Block                             | Block                             |
-| **Hoisted**                         | ✅ Yes                       | ✅ Yes                            | ✅ Yes                            |
-| **Initialized during hoisting**     | ✅ Yes (`undefined`)         | ❌ No (in Temporal Dead Zone)     | ❌ No (in Temporal Dead Zone)     |
-| **Accessible before initialization**| ✅ Yes                       | ❌ No (ReferenceError)            | ❌ No (ReferenceError)            |
-| **Can be re-declared in same scope**| ✅ Yes                       | ❌ No                             | ❌ No                             |
-| **Can be reassigned**               | ✅ Yes                       | ✅ Yes                            | ❌ No                             |
-| **Must be initialized at declaration** | ❌ No                    | ❌ No                             | ✅ Yes                            |
-| **Attached to global `this`**       | ✅ Yes (in global scope)     | ❌ No                             | ❌ No                             |
-
-> 🔸 **Note:** Only `var` declared in the global scope becomes a property of the global object (`window` in browsers). `let` and `const` do **not** attach to `this` or the global object.
-
+| Feature                               | `var`                            | `let` / `const`                                 | `function`                             |
+|----------------------------------------|----------------------------------|--------------------------------------------------|----------------------------------------|
+| **Hoisted**                            | ✅ Yes                           | ✅ Yes                                            | ✅ Yes                                 |
+| **Initialized during hoist**           | ✅ As `undefined`                | ❌ No (TDZ - Temporal Dead Zone)                 | ✅ Yes (entire function body available) |
+| **Can be accessed before declaration?**| ⚠️ Yes (`undefined` returned)    | ❌ No (ReferenceError due to TDZ)                | ✅ Yes (usable before declaration)     |
+| **Reassignment allowed**               | ✅ Yes                           | ✅ Yes (`let`), ❌ No (`const`)                   | ✅ Yes (function can be reassigned)    |
+| **Redeclaration in same scope**        | ✅ Yes                           | ❌ No                                             | ✅ Yes (only function declarations)    |
 
 ---
 
