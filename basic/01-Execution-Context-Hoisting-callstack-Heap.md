@@ -309,7 +309,7 @@ console.log(a===b); // true ::> same value and same data types
 let c=[1,2];
 let d=c;
 console.log(c==d);  // true  ::> same value cause (same reference)
-console.log(c===d); // true  ::> same value & same types
+console.log(c===d); // true  ::> same value & same types (object type)(cause js is dynamically typed language,means data type of variable is defined at runtime based on type of value)
 
 
 let e=[1,2];
