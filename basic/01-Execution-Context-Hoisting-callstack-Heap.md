@@ -33,8 +33,9 @@
 ## 🧩 Types of Execution Context
 
 ### 1. Global Execution Context (GEC)
-- Created **once** when the script starts.
+- Created **once** when the script execution starts. 
 - Represents the **global scope**.
+- Only once context is created during runtime is called GEC.
 - In browsers, it's the `window` object.(global in nodejs)
 
 ### 2. Function Execution Context (FEC)
@@ -42,16 +43,18 @@
 - Represents the **local scope** of that function.
 - Multiple function contexts can be created during runtime.
 - Similar to GEC and creates the following things
-  - ### Creation phase
-  - creatio of argument object 
-  - creation of this object(this is keyword) (with reference of global object)
-  - memory for variable and functon in local scope
-  - Assign the variable declaration with default value and function body
-  - setup the argument object with local scope
-  - ### Execution phase
+  - ### Creation phase (variable environment,memory component,memory creation phase)
+  - Creation of argument object 
+  - Creation of this object(this is keyword) (with reference of global object)
+  - Memory allocation for variable (var,let,const) and functon in local scope
+  - Assign the variable and function declaration with default value and function body
+  - Setup the argument object with local scope
+  - ### Execution phase (thread of execution,code component,code execution phase)
   - assignment of lates value to variabel and function call happen (creation of new context)
 
 ### 2. Eval Execution Context (rarely used)
+- An Eval Execution Context is created when JavaScript code is executed dynamically using eval(), new Function(), or similar mechanisms. These allow you to run strings as code at runtime.
+- Using eval() is considered bad practice (security and performance concerns).
 
 ---
 
@@ -60,15 +63,18 @@
 - There are two phases of JavaScript execution context:
 
 ### 1. Creation Phase
-- In this phase, JavaScript engine sets up the environment for the code by: creating the execution context, allocating memory for variables and functions, setting the this value, creating the lexical environment, and setting up the scope chain.
+- In this phase, JavaScript engine sets up the environment for the code by: creating the execution context, setting the this value, allocating memory for variables and functions,  creating the lexical environment, and setting up the scope chain.
 - Create a global object (window in browser)(global in nodejs).
 - this keyword creation with reference of the window object (this===window) -> true (have same reference object)
 - memory allocation for variable and funciton
 - Assign the variable declaration with default value and function body (fully hoisted with code)(full access before declaration)
-
-#### note:
+- Creation of lexical environment
+- Setting scope chain
+#### note: Every variable is accessable if they have declarationo + initialization (with defualt value at creation phase or latest value at runtime).
+- var have (D + I)  at creation phase so that we can access before variabel initalzation with latest value during runtime.
+- but let/const only have (D) at CP but initialization at runtime so that before I not able to access and get erro.
 ```js
-console.log(amu);  // undefined -> declaration & defualt initialzation (with undefined) during memory allocation phase
+console.log(amu);  // undefined -> declaration and initialization (with default value:undegined) at creation phase, so that we can access before latest value intialization during runtime.
 var amu="hey";     // latest value assign during code execution phase
 console.log(amu);  // hey
 ```
@@ -76,8 +82,8 @@ console.log(amu);  // hey
 
 ```js
 // console.log(amu);  // Uncaught ReferenceError: Cannot access 'amu' before initialization -> terminate the program
-// # Cause only declaration is happen during memory creation phase but initialization is not happen,
-// # Which is happen during code executio phase and than accessible let and const variable
+// # Declaration is happen during memory creation phase but initialization is not happen cause (value unavailable)(TDZ),
+// # So that variable is not fully intialized so that we can't access  this variable and get aboe erro.
 let amu="hey";        // latest value assign during code execution phase
 console.log(amu);     // hey
 ```
@@ -166,52 +172,15 @@ const temp2="bro";
 ```
 
 
-## JavaScript Variable Declarations: `var`, `let`, and `const`
+## JavaScript Hoisting Summary Table
 
-| Feature                             | `var`                        | `let`                             | `const`                           |
-|-------------------------------------|------------------------------|-----------------------------------|-----------------------------------|
-| **Scope**                           | Function / Global            | Block                             | Block                             |
-| **Hoisted**                         | ✅ Yes                       | ✅ Yes                            | ✅ Yes                            |
-| **Initialized during hoisting**     | ✅ Yes (`undefined`)         | ❌ No (in Temporal Dead Zone)     | ❌ No (in Temporal Dead Zone)     |
-| **Accessible before initialization**| ✅ Yes                       | ❌ No (ReferenceError)            | ❌ No (ReferenceError)            |
-| **Can be re-declared in same scope**| ✅ Yes                       | ❌ No                             | ❌ No                             |
-| **Can be reassigned**               | ✅ Yes                       | ✅ Yes                            | ❌ No                             |
-| **Must be initialized at declaration** | ❌ No                    | ❌ No                             | ✅ Yes                            |
-| **Attached to global `this`**       | ✅ Yes (in global scope)     | ❌ No                             | ❌ No                             |
-
-
-```js
-let anem0="globa-0";
-function af1()
-{
-    let anem0="function-1";    // for also const
-    console.log("F-1::>",this.anem0);    // undefined
-    function af2(){
-        console.log("F-2::>",this.anem0);  // undefined
-    }
-    af2();
-}
-af1();
-```
-
-
-```js
-var anem0="globa-0";
-function af1()
-{
-    let anem0="function-1";
-    console.log("F-1::>",this.anem0);    // globa-0
-    function af2(){
-        let anem0="function-2";
-        console.log("F-2::>",this.anem0);  // globa-0
-    }
-    af2();
-}
-af1();
-```
-
-> 🔸 **Note:** Only `var` declared in the global scope becomes a property of the global object (`window` in browsers). `let` and `const` do **not** attach to `this` or the global object (so during acces not found key in global object reutn undefined).
-
+| Feature                               | `var`                            | `let` / `const`                                 | `function`                             |
+|----------------------------------------|----------------------------------|--------------------------------------------------|----------------------------------------|
+| **Hoisted**                            | ✅ Yes                           | ✅ Yes                                            | ✅ Yes                                 |
+| **Initialized during hoist**           | ✅ As `undefined`                | ❌ No (TDZ - Temporal Dead Zone)                 | ✅ Yes (entire function body available) |
+| **Can be accessed before declaration?**| ⚠️ Yes (`undefined` returned)    | ❌ No (ReferenceError due to TDZ)                | ✅ Yes (usable before declaration)     |
+| **Reassignment allowed**               | ✅ Yes                           | ✅ Yes (`let`), ❌ No (`const`)                   | ✅ Yes (function can be reassigned)    |
+| **Redeclaration in same scope**        | ✅ Yes                           | ❌ No                                             | ✅ Yes (only function declarations)    |
 
 ---
 
