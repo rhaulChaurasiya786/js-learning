@@ -174,13 +174,19 @@ const temp2="bro";
 
 ## JavaScript Hoisting Summary Table
 
-| Feature                               | `var`                            | `let` / `const`                                 | `function`                             |
-|----------------------------------------|----------------------------------|--------------------------------------------------|----------------------------------------|
-| **Hoisted**                            | ✅ Yes                           | ✅ Yes                                            | ✅ Yes                                 |
-| **Initialized during hoist**           | ✅ As `undefined`                | ❌ No (TDZ - Temporal Dead Zone)                 | ✅ Yes (entire function body available) |
-| **Can be accessed before declaration?**| ⚠️ Yes (`undefined` returned)    | ❌ No (ReferenceError due to TDZ)                | ✅ Yes (usable before declaration)     |
-| **Reassignment allowed**               | ✅ Yes                           | ✅ Yes (`let`), ❌ No (`const`)                   | ✅ Yes (function can be reassigned)    |
-| **Redeclaration in same scope**        | ✅ Yes                           | ❌ No                                             | ✅ Yes (only function declarations)    |
+| Feature                             | `var`                        | `let`                             | `const`                           |
+|-------------------------------------|------------------------------|-----------------------------------|-----------------------------------|
+| **Scope**                           | Function / Global            | Block                             | Block                             |
+| **Hoisted**                         | ✅ Yes                       | ✅ Yes                            | ✅ Yes                            |
+| **Initialized during hoisting**     | ✅ Yes (`undefined`)         | ❌ No (in Temporal Dead Zone)     | ❌ No (in Temporal Dead Zone)     |
+| **Accessible before initialization**| ✅ Yes                       | ❌ No (ReferenceError)            | ❌ No (ReferenceError)            |
+| **Can be re-declared in same scope**| ✅ Yes                       | ❌ No                             | ❌ No                             |
+| **Can be reassigned**               | ✅ Yes                       | ✅ Yes                            | ❌ No                             |
+| **Must be initialized at declaration** | ❌ No                    | ❌ No                             | ✅ Yes                            |
+| **Attached to global `this`**       | ✅ Yes (in global scope)     | ❌ No                             | ❌ No                             |
+
+> 🔸 **Note:** Only `var` declared in the global scope becomes a property of the global object (`window` in browsers). `let` and `const` do **not** attach to `this` or the global object.
+
 
 ---
 
