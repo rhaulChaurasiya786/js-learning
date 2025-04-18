@@ -316,4 +316,14 @@ let e=[1,2];
 let f=[1,2,3];    // let d=[1,2,3];  or  const d=[1,2,3];
 console.log(e==f);  // false ::> differ value  cause differ memory reference
 console.log(e===f); // false ::> differ value but same types
+
+
+let a=[1,2];
+let b={name:"rahul"};
+function c(){};
+console.log(typeof a);  // object
+console.log(typeof b);  // object
+console.log(a==b);      // False : Different reference value
+console.log(a===b);     // False : Same Type but diffenet reference value
+console.log(typeof c);  // function
 ```
