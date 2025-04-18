@@ -57,28 +57,27 @@ if(true)
 
 ```js
 // # Var is hoisted to function scope and global scope(if outside of funciton )(in any block except function block)
-if(true){
-     var amu1=10;     //hoisted to global
-    console.log(amu1);
+if(true)
+{
+    var amu1="1";       //hoisted to global
 }
 {
-    var amu2=20;       //hoisted to global
-   console.log(amu2);
+    var amu2="2";      //hoisted to global
 }
 for(i=0;i<=5;i++)
 {
-    var amu3=i;       //hoisted to global and each iteratio recreation of var is not happen only once (due to glocal scope)
+    var amu3=i;      //hoisted to global and each iteratio recreation of var is not happen only once (due to glocal scope)
 }
 function sayHi()
 {
-    var amu4=40;      // hoisted in that funciton local scope & destroyed after function execution done
-    console.log(amu4);
+    var amu4="4";      // hoisted in that funciton local scope & destroyed after function execution done
+    
 }
-console.log(amu1);  // 10
-console.log(amu2);  // 20
-console.log(amu3);  // 5
 sayHi();
-console.log(amu4);  // ReferenceError (var is hoisted in funciton scope and not access outside this scope )
+console.log(amu1); // 1
+console.log(amu2); // 2
+console.log(amu3); // 5
+console.log(amu4); // Uncaught ReferenceError: amu4 is not defined
 ```
 
 
