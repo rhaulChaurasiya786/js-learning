@@ -326,4 +326,11 @@ console.log(typeof b);  // object
 console.log(a==b);      // False : Different reference value
 console.log(a===b);     // False : Same Type but diffenet reference value
 console.log(typeof c);  // function
+
+
+
+function a(){}
+function b(){}
+console.log(a==b);  // false : diff reference value
+console.log(a===b); // false : same type but diff reference value
 ```
