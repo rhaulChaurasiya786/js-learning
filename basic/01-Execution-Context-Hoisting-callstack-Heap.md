@@ -303,7 +303,7 @@ console.log(d);    // <0x02> of [1,2,3]
 let a=10;
 let b=10;
 console.log(a==b);  // true ::> same value
-console.log(a===b); // true ::> same data types
+console.log(a===b); // true ::> same value and same data types
 
 
 let c=[1,2];
